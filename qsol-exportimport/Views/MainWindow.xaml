@@ -1,0 +1,95 @@
+﻿<Window x:Class="qsol.exportimport.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:designVm="clr-namespace:qsol.exportimport.DesignVM"
+        d:DataContext="{d:DesignInstance designVm:MainWindowDesignVM, IsDesignTimeCreatable=True}"
+        mc:Ignorable="d"
+        Title="Export/Import" Height="Auto" Width="620"
+        >
+    <Window.Resources>
+        <FrameworkElement x:Key="ProxyElement" DataContext="{Binding}"/>
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Padding" Value="1"/>
+        </Style>
+        <Style TargetType="TextBlock">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+        <Style TargetType="Button">
+            <Setter Property="Margin" Value="3"/>
+            <Setter Property="Padding" Value="1"/>
+        </Style>
+        <Style TargetType="ListView">
+            <Setter Property="Margin" Value="3"/>
+        </Style>
+</Window.Resources>
+    <Window.InputBindings>
+        <KeyBinding Key ="Escape" Command="{Binding EscapeRunningCommand}" />
+    </Window.InputBindings>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="100"/>
+            <ColumnDefinition Width="200"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <TextBlock Text="Data source" Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="0" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Server name" Grid.Row="1" Grid.Column="0" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="1" Grid.Row="1" Text="{Binding SourceServer}"/>
+        <TextBlock Text="Database" Grid.Row="2" Grid.Column="0" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="1" Grid.Row="2" Text="{Binding SourceDatabase}"/>
+        <TextBlock Text="User name" Grid.Row="3" Grid.Column="0" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Text="{Binding SourceUserName}"/>
+        <TextBlock Text="Password" Grid.Row="4" Grid.Column="0" VerticalAlignment="Bottom"/>
+        <PasswordBox Name="SourcePasswordBox" Grid.Column="1" Grid.Row="4" PasswordChar="*" MaxLength="20"/>
+        <Button Content="Test source connection" Grid.Column="1" Grid.Row="5" Command="{Binding SourceConnectionCommand}"></Button>
+
+        <TextBlock Text="Destination" Grid.Column="2" Grid.Row="0" Grid.ColumnSpan="2" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+        <TextBlock Text="Server name" Grid.Column="2" Grid.Row="1" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="3" Grid.Row="1" Text="{Binding DestinationServer}"/>
+        <TextBlock Text="Database" Grid.Column="2" Grid.Row="2" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="3" Grid.Row="2" Text="{Binding DestinationDatabase}"/>
+        <TextBlock Text="User name" Grid.Column="2" Grid.Row="3" VerticalAlignment="Bottom"/>
+        <TextBox Grid.Column="3" Grid.Row="3" Text="{Binding DestinationUserName}"/>
+        <TextBlock Text="Password" Grid.Column="2" Grid.Row="4" VerticalAlignment="Bottom"/>
+        <PasswordBox Name="DestinationPasswordBox" Grid.Column="3" Grid.Row="4" PasswordChar="*" MaxLength="20"/>
+        <Button Content="Test dastination connection" Grid.Column="3" Grid.Row="5" Command="{Binding DestinationConnectionCommand}"></Button>
+
+        <Button Content="Start export" Grid.Row="6" Grid.Column="0" Command="{Binding StartExportCommand}"></Button>
+        <DockPanel LastChildFill="True"  Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="6" Grid.RowSpan="2">
+            <ListView ItemsSource="{Binding Path=ListOfExported}"
+                      SelectionMode="Single"
+                      HorizontalAlignment="Stretch"
+                      VerticalAlignment="Stretch"
+                      MinHeight="100" DockPanel.Dock="Right">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Width="150" Header="Table name" 
+                                        DisplayMemberBinding="{Binding TableName}"  />
+                        <GridViewColumn Width="60" Header="Imported"  
+                                        DisplayMemberBinding="{Binding Imported}" />
+                        <GridViewColumn Width="60" Header="Count"
+                                        DisplayMemberBinding="{Binding Count}" />
+                        <GridViewColumn Width="225" Header="Info"
+                                        DisplayMemberBinding="{Binding Info}" />
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </DockPanel>
+        <TextBlock Text="{Binding LogInfo.Info}" Grid.Column="0" Grid.Row="8" Grid.ColumnSpan="4" VerticalAlignment="Center" HorizontalAlignment="Left"/>
+    </Grid>
+</Window>

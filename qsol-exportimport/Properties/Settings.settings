@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="qsol.exportimport.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="SourceServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="SourceDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rebuh</Value>
+    </Setting>
+    <Setting Name="SourceUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rebuh</Value>
+    </Setting>
+    <Setting Name="DestinationServer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
+    </Setting>
+    <Setting Name="DestinationDatabase" Type="System.String" Scope="User">
+      <Value Profile="(Default)">RebuhExport</Value>
+    </Setting>
+    <Setting Name="DestinationUserName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Rebuh</Value>
+    </Setting>
+    <Setting Name="TableName" Type="System.String" Scope="User">
+      <Value Profile="(Default)">IT052</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
